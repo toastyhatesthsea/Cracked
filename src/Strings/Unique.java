@@ -49,8 +49,8 @@ class UniqueTesters
 {
     public static void main(String[] asdasdasdas)
     {
-        boolean answer = Unique.isUnique("whatinthebutt");
-        boolean anotherAnswer = Unique.isUniqueFaster("whatinthebutt");
+        boolean answer = Unique.isUnique("whathowisit");
+        boolean anotherAnswer = Unique.isUniqueFaster("whathowisit");
 
     }
 }
