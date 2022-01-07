@@ -44,6 +44,18 @@ public class LinkedList<T>
         return someValue;
     }
 
+    public void deleteMiddle()
+    {
+        int middle = this.size / 2;
+        Node current = head;
+
+        for (int i = 1; i < middle; i++)
+        {
+            current = current.next;
+        }
+        current.next = current.next.next;
+    }
+
     public boolean removeDuplicates()
     {
         HashMap<T, Integer> collection = new HashMap<>();
@@ -68,26 +80,87 @@ public class LinkedList<T>
         }
         return answer;
     }
+
+    public static boolean isPalindrone(LinkedList<Character> aList)
+    {
+        LinkedList<Character> reverseList = new LinkedList<Character>();
+
+        Node current = aList.head;
+
+        while (current != null)
+        {
+            Character aChar = (Character) current.someData;
+            reverseList.add(aChar);
+            current = current.next;
+        }
+
+        boolean answer = true;
+        Node currentNodeForAList = aList.head;
+        Node currentNodeForReverseList = reverseList.head;
+    }
+
+    public static LinkedList addLinkedListsOfNumbers(LinkedList listOne, LinkedList listTwo)
+    {
+        int intOne = 0;
+        int intTwo = 0;
+
+        Node current = listOne.head;
+
+        while (current != null)
+        {
+            intOne = intOne * 10 + (int) current.someData;
+            current = current.next;
+        }
+
+        current = listTwo.head;
+
+        while (current != null)
+        {
+            intTwo = intTwo * 10 + (int) current.someData;
+            current = current.next;
+        }
+
+        int total = intOne + intTwo;
+
+        LinkedList<Integer> someTotal = new LinkedList<Integer>();
+
+        while (total >= 10)
+        {
+            int digit = total % 10;
+            someTotal.add(digit);
+            total = total / 10;
+        }
+        someTotal.add(total);
+
+        return someTotal;
+    }
 }
 
 class ListTesters<T>
 {
     public static void main(String[] asldkasldkasd)
     {
-        LinkedList someList = new LinkedList();
+        LinkedList listOne = new LinkedList();
+        LinkedList listTwo = new LinkedList();
         int meow = 5;
         int rawrs = 6;
 
-        someList.add(meow);
-        someList.add(rawrs);
-        someList.add(8);
-        someList.add(5);
-        someList.add(10);
-        someList.add(8);
-        someList.add(9);
-        someList.add(9);
+        listOne.add(meow);
+        listOne.add(rawrs);
+        listOne.add(8);
+        listOne.add(5);
+        //5865
+
+        listTwo.add(5);
+        listTwo.add(8);
+        listTwo.add(9);
+        listTwo.add(9);
+        listTwo.add(3);
+        //39981
 
         //someList.removeDuplicates();
-        Object someObject = someList.findElementFromLast(2);
+        //Object someObject = someList.findElementFromLast(2);
+        //listOne.deleteMiddle();
+        LinkedList total = LinkedList.addLinkedListsOfNumbers(listOne, listTwo);
     }
 }
