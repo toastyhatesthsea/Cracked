@@ -94,9 +94,48 @@ public class LinkedList<T>
             current = current.next;
         }
 
-        boolean answer = true;
         Node currentNodeForAList = aList.head;
         Node currentNodeForReverseList = reverseList.head;
+
+        while (currentNodeForAList != null)
+        {
+            char aListChar = (char)currentNodeForAList.someData;
+            char reverseListChar = (char) currentNodeForReverseList.someData;
+
+            if (aListChar != reverseListChar)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean intersection(LinkedList listOne, LinkedList listTwo)
+    {
+        Node currentNodeForListOne = listOne.head;
+        Node currentNodeForListTwo = listTwo.head;
+
+        HashMap<Node, Integer> aCollectionOfNodes = new HashMap<>();
+
+        while (currentNodeForListOne != null)
+        {
+            if (aCollectionOfNodes.putIfAbsent(currentNodeForListOne, 1) != null)
+            {
+                return true;
+            }
+            currentNodeForListOne = currentNodeForListOne.next;
+        }
+
+        while (currentNodeForListTwo != null)
+        {
+            if (aCollectionOfNodes.putIfAbsent(currentNodeForListTwo, 1) != null)
+            {
+                return true;
+            }
+            currentNodeForListTwo = currentNodeForListTwo.next;
+        }
+        return false;
     }
 
     public static LinkedList addLinkedListsOfNumbers(LinkedList listOne, LinkedList listTwo)
@@ -108,7 +147,7 @@ public class LinkedList<T>
 
         while (current != null)
         {
-            intOne = intOne * 10 + (int) current.someData;
+            int One = intOne * 10 + (int) current.someData;
             current = current.next;
         }
 
@@ -156,11 +195,13 @@ class ListTesters<T>
         listTwo.add(9);
         listTwo.add(9);
         listTwo.add(3);
+        listTwo.add(rawrs);
         //39981
 
         //someList.removeDuplicates();
         //Object someObject = someList.findElementFromLast(2);
         //listOne.deleteMiddle();
-        LinkedList total = LinkedList.addLinkedListsOfNumbers(listOne, listTwo);
+        //LinkedList total = LinkedList.addLinkedListsOfNumbers(listOne, listTwo);
+        boolean intersectionAnswer = LinkedList.intersection(listOne, listTwo);
     }
 }
