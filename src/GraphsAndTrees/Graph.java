@@ -52,6 +52,36 @@ public class Graph<T> implements Cloneable
         return answer;
     }
 
+    private boolean[] arrayOfNeighbors(int vertex)
+    {
+        boolean[] tempers = new boolean[edges[vertex].length];
+
+        for (int i = 0; i < edges[vertex].length; i++)
+        {
+            tempers[i] = edges[vertex][i];
+        }
+
+        return tempers;
+    }
+
+    /**
+     * Swaps the Edges of the two vertices
+     *
+     * @param vertexOne int
+     * @param vertexTwo int
+     */
+    public void interchange(int vertexOne, int vertexTwo)
+    {
+        boolean[] vertexOneConnections = arrayOfNeighbors(vertexOne);
+        boolean[] vertexTwoConnections = arrayOfNeighbors(vertexTwo);
+
+        for (int i = 0; i < vertexOneConnections.length; i++)
+        {
+            this.edges[vertexTwo][i] = vertexOneConnections[i];
+            this.edges[vertexOne][i] = vertexTwoConnections[i];
+        }
+    }
+
     public void deleteVertices(int amount)
     {
         int newSize = labels.length - amount;
@@ -89,4 +119,14 @@ public class Graph<T> implements Cloneable
     }
 }
 
-
+class GraphTesters
+{
+    public static void main(String[] asdkjaskdjasd)
+    {
+        Graph someGraph = new Graph(5);
+        someGraph.addEdge(1, 1);
+        someGraph.addEdge(1, 2);
+        someGraph.addEdge(0, 3);
+        someGraph.interchange(1, 0);
+    }
+}
