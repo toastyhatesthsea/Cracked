@@ -5,11 +5,13 @@ public class Graph<T> implements Cloneable
 
     public boolean[][] edges;
     public T[] labels;
+    public int size;
 
     public Graph(int size)
     {
         edges = new boolean[size][size];
         labels = (T[]) new Object[size];
+        this.size = size;
     }
 
     public void addEdge(int source, int target)
@@ -116,6 +118,30 @@ public class Graph<T> implements Cloneable
         }
         this.labels = newLabels;
         this.edges = newEdges;
+    }
+
+    public static <T> void depthFirstRecurse(Graph<T> aGraph, int v, boolean[] marked)
+    {
+        int[] connections = aGraph.neighbors(v);
+        int i;
+
+        marked[v] = true;
+        System.out.println(aGraph.getLabel(v));
+
+        for (int nextNeighbor : connections)
+        {
+            if (!marked[nextNeighbor])
+            {
+                depthFirstRecurse(aGraph, nextNeighbor, marked);
+            }
+        }
+    }
+
+    public static <T> void depthFirstPrint(Graph<T> aGraph, int start)
+    {
+        boolean[] marked = new boolean[aGraph.size];
+
+        depthFirstRecurse(aGraph, start, marked);
     }
 }
 
